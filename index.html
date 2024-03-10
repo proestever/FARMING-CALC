@@ -9,51 +9,57 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
-        background-color: #f4f4f4;
+        background-color: #121212; /* Dark background */
+        color: #e0e0e0; /* Light text color for contrast */
     }
     .container {
         max-width: 600px;
         margin: auto;
-        background: white;
+        background: #1e1e1e; /* Slightly lighter dark shade for the container */
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Lighter shadow for depth */
     }
     h2 {
         text-align: center;
-        color: #333;
+        color: #ffffff;
+    }
+    .logo {
+        display: block;
+        margin: 10px auto; /* Center the logo */
+        width: 100px; /* Set a fixed width for the logo images */
+        height: auto; /* Maintain aspect ratio */
+    }
+    label, button {
+        display: block;
+        width: 100%;
     }
     label {
         margin-top: 10px;
-        display: block;
-        color: #666;
+        color: #bbbbbb;
     }
-    input {
-        width: 100%;
+    input, button {
         padding: 8px;
         margin-top: 5px;
-        margin-bottom: 20px;
         border-radius: 4px;
-        border: 1px solid #ddd;
-        box-sizing: border-box; /* Added box-sizing */
+        border: 1px solid #333333;
+        background-color: #262626; /* Darker elements for input and button */
+        color: #ffffff; /* Light text for visibility */
+        box-sizing: border-box; /* Ensures padding doesn't add to width */
     }
     button {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
         cursor: pointer;
+        background-color: #007bff; /* Button color */
     }
     button:hover {
-        background-color: #0056b3;
+        background-color: #0056b3; /* Darker button on hover */
     }
     .result {
         margin-top: 20px;
         padding: 10px;
-        background-color: #e9e9e9;
+        background-color: #333333; /* Dark background for result boxes */
         border-radius: 4px;
+        color: #ffffff; /* Ensure text is visible */
     }
 </style>
 <script>
@@ -75,19 +81,25 @@
 </head>
 <body>
 <div class="container">
+    <img src="assets/PULSEX_VECTOR.svg" alt="PULSEX Logo" class="logo">
+    <img src="assets/INC_VECTOR.svg" alt="INC Logo" class="logo">
     <h2>INC and INC/PLSX Farming Calculator</h2>
 
     <label for="investment">Investment Amount ($):</label>
     <input type="number" id="investment" required>
+    <br>
 
     <label for="incRate">Monthly INC Appreciation Rate (%):</label>
     <input type="number" id="incRate" step="0.01" required>
+    <br>
 
     <label for="plsxRate">Monthly PLSX Appreciation Rate (%):</label>
     <input type="number" id="plsxRate" step="0.01" required>
+    <br>
 
     <label for="incYield">Monthly INC Yield (tokens):</label>
     <input type="number" id="incYield" required>
+    <br>
 
     <button onclick="calculateInvestment()">Calculate</button>
 
