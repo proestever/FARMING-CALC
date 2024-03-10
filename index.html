@@ -3,28 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Investment Calculator</title>
+<title>Investment Calculator with INC Yield</title>
 <script>
     function calculateInvestment() {
         // Retrieve input values
         var investment = parseFloat(document.getElementById('investment').value);
         var incRate = parseFloat(document.getElementById('incRate').value) / 100;
         var plsxRate = parseFloat(document.getElementById('plsxRate').value) / 100;
+        var incYield = parseFloat(document.getElementById('incYield').value); // Monthly INC yield
 
         // Calculate final values for both scenarios
         var incFinal = investment * (1 + incRate); // INC only
         var plsxInvestment = investment * 0.5; // Half investment for PLSX in 50/50 scenario
-        var incPlsxIncFinal = plsxInvestment * (1 + incRate); // Half investment for INC with appreciation
+        var incPlsxIncFinal = (plsxInvestment * (1 + incRate)) + incYield; // Half investment for INC with appreciation and yield
         var incPlsxPlsxFinal = plsxInvestment * (1 + plsxRate); // Half investment for PLSX with appreciation
 
         // Display the results
         document.getElementById('incResult').textContent = 'Final Value for INC Only: $' + incFinal.toFixed(2);
-        document.getElementById('incPlsxResult').textContent = 'Final Value for 50/50 INC/PLSX: $' + (incPlsxIncFinal + incPlsxPlsxFinal).toFixed(2);
+        document.getElementById('incPlsxResult').textContent = 'Final Value for 50/50 INC/PLSX with Yield: $' + (incPlsxIncFinal + incPlsxPlsxFinal).toFixed(2);
     }
 </script>
 </head>
 <body>
-<h2>Investment Calculator</h2>
+<h2>Investment Calculator with INC Yield</h2>
 
 <label for="investment">Investment Amount ($):</label>
 <input type="number" id="investment" required>
@@ -36,6 +37,10 @@
 
 <label for="plsxRate">Monthly PLSX Appreciation Rate (%):</label>
 <input type="number" id="plsxRate" step="0.01" required>
+<br>
+
+<label for="incYield">Monthly INC Yield (tokens):</label>
+<input type="number" id="incYield" required>
 <br>
 
 <button onclick="calculateInvestment()">Calculate</button>
