@@ -64,6 +64,22 @@
         color: #ffffff; /* Ensure text is visible */
     }
 </style>
+    <div id="mikeHolders">Loading MIKE holders...</div>
+
+ <script>
+  fetch('https://api.scan.pulsechain.com/api/v2/tokens/0xa8DCD0EB29f6F918289b5C14634C1B5F443Af826/holders', {
+    headers: {
+      'accept': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); // Process your data here
+    // For example, display the number of holders in an element with id="mikeHolders"
+    document.getElementById('mikeHolders').textContent = 'Number of MIKE Holders: ' + data.total;
+  })
+  .catch(error => console.error('Error fetching MIKE holders:', error));
+</script>
 <script>
     function calculateInvestment() {
         var investment = parseFloat(document.getElementById('investment').value);
