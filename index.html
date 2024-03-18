@@ -64,22 +64,43 @@
         color: #ffffff; /* Ensure text is visible */
     }
 </style>
-    <div id="mikeHolders">Loading MIKE holders...</div>
+    <body>
 
- <script>
+<div id="mikeHolders">Loading MIKE holders...</div>
+
+<script>
+// Function to fetch MIKE holders and update the page
+function fetchMikeHolders() {
   fetch('https://api.scan.pulsechain.com/api/v2/tokens/0xa8DCD0EB29f6F918289b5C14634C1B5F443Af826/holders', {
     headers: {
       'accept': 'application/json'
     }
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data); // Process your data here
-    // For example, display the number of holders in an element with id="mikeHolders"
-    document.getElementById('mikeHolders').textContent = 'Number of MIKE Holders: ' + data.total;
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
   })
-  .catch(error => console.error('Error fetching MIKE holders:', error));
+  .then(data => {
+    // Adjust the dataPath based on the actual response structure from the API
+    const dataPath = 'data.total'; // Example path, adjust based on actual API response
+    const holdersCount = dataPath.split('.').reduce((o, k) => (o || {})[k], data);
+    
+    // Update the page with the number of holders
+    document.getElementById('mikeHolders').textContent = 'Number of MIKE Holders: ' + holdersCount;
+  })
+  .catch(error => {
+    console.error('Error fetching MIKE holders:', error);
+    document.getElementById('mikeHolders').textContent = 'Failed to load MIKE holders';
+  });
+}
+
+// Call the function when the script loads
+fetchMikeHolders();
 </script>
+
+</body>
 <script>
     function calculateInvestment() {
         var investment = parseFloat(document.getElementById('investment').value);
