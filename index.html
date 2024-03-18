@@ -70,38 +70,39 @@
 
     
 
-<body>
+<div id="holdersCount">Loading...</div>
 
-<div id="mikeHolders">Loading MIKE Token Holder Count...</div>
+<button onclick="fetchHoldersCount()">Refresh Count</button>
 
 <script>
-function fetchMikeHolders() {
-  fetch('https://api.scan.pulsechain.com/api/v2/tokens/0xa8DCD0EB29f6F918289b5C14634C1B5F443Af826/counters', {
-    headers: {
-      'accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Extract the token_holder_count from the response
-    const holderCount = data.token_holder_count;
-    
-    // Update the page with the token holder count
-    document.getElementById('mikeHolders').textContent = holderCount;
-  })
-  .catch(error => {
-    console.error('Error fetching MIKE Token Holder Count:', error);
-    document.getElementById('mikeHolders').textContent = 'Failed to load MIKE Token Holder Count';
-  });
+// Function to fetch the token holders count and update the webpage
+function fetchHoldersCount() {
+    fetch('https://api.scan.pulsechain.com/api/v2/tokens/0xa8DCD0EB29f6F918289b5C14634C1B5F443Af826/counters', {
+        headers: {
+            'accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Extract the token_holders_count from the response
+        const holdersCount = data.token_holders_count;
+
+        // Update the webpage with the holders count
+        document.getElementById('holdersCount').textContent = `Holders: ${holdersCount}`;
+    })
+    .catch(error => {
+        console.error('Error fetching holders count:', error);
+        document.getElementById('holdersCount').textContent = 'Failed to load holders count';
+    });
 }
 
-// Call the function when the script loads
-fetchMikeHolders();
+// Fetch the holders count when the page loads
+fetchHoldersCount();
 </script>
 
 </body>
